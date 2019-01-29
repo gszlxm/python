@@ -1,0 +1,131 @@
+GIT  代码协同管理工具
+
+代码管理工具作用:
+SVN盗版比较多, 收费, 逻辑简单, 使用简单
+
+* 防止代码丢失, 做代码备份
+* 代码的版本控制, 可以设置多个节点, 在多个版本间切换
+* 可以方便团队开发, 更好的做代码管理
+* 可以方便产品的迭代
+
+什么是git
+git一个开源的分布式版本控制系统, 可以用于管理大小项目
+
+分布式和集中式: SVN是集中式
+
+分布式: 每个节点都保存代码, 没有明确的中央服务器, 节点之间相互推送共享代码.
+
+* 分布式每个节点都可以做中央服务器
+
+集中式: 代码由中央服务端集中管理, 为每个节点分配权限, 每个节点统一上传到中央服务器, 或从
+     服务器下载 (方便管理和保密)
+
+git 特点
+
+* git可以管理各种文件, 特别是代码项目, 多在*nix系统使用
+
+* git是分布式, 不同于svn的集中式, 这是Git和svn的最大差别
+
+* git是开源系统, 可以脱网使用, 数据传输速度快
+
+* git更好的支持分支协作, 分布式代码更安全
+
+* git的安全性很强，有全球唯一的commit版本号
+
+* git的分支管理很强大，可以方便多人协同工作
+
+git安装
+
+sudo apt-get install git
+
+git 配置命令
+
+git config --> 配置器
+
+三个级别
+操作系统级别
+用户级别
+项目级别
+linux 系统中 一个-就是一个短选项, --是长选项
+
+配置级别
+  1. 系统中所有用户都可以使用该配置
+     命令 git config --system
+     配置文件:  /etc/gitconfig
+
+  2. 当前用户可使用该配置
+     命令: git config --global
+     配置文件: ~/.gitconfig
+
+  3. 当前项目可使用该配置, 必须在项目目录下执行
+     命令: git config
+     配置文件: project/.git/config
+
+配置内容:
+
+    1. 配置用户名
+    e.g. 配置用户名为 Tedu
+    git config --global user.name Tedu 
+    ~$ cat ./.gitconfig
+    [user]
+	    name = Tedu
+ 
+    2. 配置邮箱
+    sudo git config --system user.email lvze@tedu.com
+    cat /etc/gitconfig
+    [user]
+    	email = lvze@tedu.com
+
+配置项目必须是在项目目录里面操作
+    3. 配置编译器
+
+    仓库初始化
+    git init
+    初始化空的 Git 仓库于 /home/tarena/baidu/.git/
+
+    e.g. 编译器配置
+    git config core.editor vscode
+
+    cat .git/config
+    [core]
+	    repositoryformatversion = 0
+	    filemode = true
+	    bare = false
+	    logallrefupdates = true
+	    editor = vscode (只有这一项是自己配置的)
+
+    4. 查看项目配置
+        git config --list
+
+git的基本命令
+
+1. 初始化仓库
+  
+   git init 
+
+   * 在某个目录下初始化仓库后自动产生.git目录.
+     则该目录变为一个git仓库, 在该目录下所有文件可以使用git管理
+
+工作区:  用于用户对项目文件的各种直接操作, 即项目目录操作
+
+暂存区: 用于记录用户对工作区的各种修改, 以便同步到本地仓库中.(类似于日志)
+
+git仓库: 用于存储备份工作区的内容, 方便git进行管理
+
+2. 查看分支状态
+ 
+ git status
+
+ 分支: 在git仓库中一个独立的工作环境,  不影响其他分支操作.
+      git仓库初始默认工作分支为master.
+
+      若是工作区与本地仓库一致,就会出现以下
+      位于分支 master
+      初始提交
+      无文件要提交（创建/拷贝文件并使用 "git add" 建立跟踪）
+      
+      若是不一致,则会出现其他的提示
+
+3. 文件提交到暂存区
+
+   git add [file]      
